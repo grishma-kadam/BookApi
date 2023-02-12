@@ -15,6 +15,9 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    image:{
+        type:String
+    },
     books:[{
         type:mongoose.SchemaTypes.ObjectId,
         ref:'Book'
@@ -41,7 +44,7 @@ userSchema.statics.signup=async function(name,email,password){
    
     const salt=await bcrypt.genSalt()
     const hash=await bcrypt.hash(password,salt)
-    const user=await this.create({name,email,password:hash})
+    const user=await this.create({name,email,password:hash,image:""})
     return user
 }
 
